@@ -15,4 +15,4 @@ services:
     # - Do not store plaintext passwords in source control. We
     # do so here as this is a builder
     environment:
-      POSTGRES_PASSWORD: TESTX!
+      POSTGRES_PASSWORD: changemeinprod!
