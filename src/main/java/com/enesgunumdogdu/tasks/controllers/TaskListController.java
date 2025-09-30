@@ -1,11 +1,10 @@
 package com.enesgunumdogdu.tasks.controllers;
 
 import com.enesgunumdogdu.tasks.domain.dto.TaskListDto;
+import com.enesgunumdogdu.tasks.domain.entities.TaskList;
 import com.enesgunumdogdu.tasks.mappers.TaskListMapper;
 import com.enesgunumdogdu.tasks.services.TaskListService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +27,13 @@ public class TaskListController{
                 .stream()
                 .map(taskListMapper::toDto)
                 .toList();
+    }
+
+    @PostMapping
+    public TaskListDto createTaskList(@RequestBody TaskListDto taskListDto) {
+        TaskList createdTaskList = tasklistService.createTaskList(
+                taskListMapper.fromDto(taskListDto)
+        );
+        return taskListMapper.toDto(createdTaskList);
     }
 }
