@@ -49,4 +49,10 @@ public class TaskListController{
         TaskList updatedTaskList = tasklistService.updateTaskList(taskListId, taskListMapper.fromDto(taskListDto));
         return taskListMapper.toDto(updatedTaskList);
     }
+
+    @DeleteMapping(path = "/{task_list_id}")
+    public void deleteTasklist(@PathVariable("task_list_id") UUID taskListId){
+        tasklistService.deleteTaskList(taskListId);
+
+    }
 }
