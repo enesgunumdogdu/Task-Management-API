@@ -1,12 +1,10 @@
 package com.enesgunumdogdu.tasks.controllers;
 
 import com.enesgunumdogdu.tasks.domain.dto.TaskDto;
+import com.enesgunumdogdu.tasks.domain.entities.Task;
 import com.enesgunumdogdu.tasks.mappers.TaskMapper;
 import com.enesgunumdogdu.tasks.services.TaskService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,5 +27,11 @@ public class TasksController {
                 .stream()
                 .map(taskMapper::toDto)
                 .toList();
+    }
+
+    @PostMapping
+    public TaskDto createTask(@PathVariable("task_list_id") UUID taskListId, @RequestBody TaskDto taskDto) {
+        Task createdTask = taskService.createTask(taskListId,taskMapper.fromDto(taskDto));
+        return taskMapper.toDto(createdTask);
     }
 }
